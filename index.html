@@ -51,10 +51,10 @@
         
         .action-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
         .btn-action { padding: 15px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
-        .btn-map-main { background: var(--gold); color: white; display: none; } /* Mặc định ẩn nút Bản đồ */
+        .btn-map-main { background: var(--gold); color: white; display: none; }
         .btn-wish { background: var(--primary); color: white; }
 
-        /* --- BƯỚC 3.5: TRANG HƯỚNG DẪN --- */
+        /* --- BƯỚC 3.5: TRANG HƯỚNG DẪN CHI TIẾT --- */
         #step-map-guide { display: none; padding: 0; background: #fff; }
         .guide-header { text-align: center; color: var(--primary); padding-top: 20px; font-weight: bold; font-size: 1.2rem; }
         .map-guide-img { width: 90%; margin: 20px 5%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -63,9 +63,12 @@
         .bg-orange { background: #e67e22; }
         .bg-blue { background: #2980b9; }
 
+        /* --- KHU VỰC CONTACT CỦA KIỆT --- */
         .contact-section { background: #f8f9fa; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin: 0 20px 20px; }
-        .contact-title { font-weight: bold; color: #555; margin-bottom: 15px; font-size: 0.95rem; display: block; text-align: center; }
-        .btn-contact { padding: 12px; border-radius: 10px; border: none; color: white; font-weight: bold; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .contact-header-title { font-weight: bold; color: var(--primary); margin-bottom: 20px; font-size: 1.1rem; display: block; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        .contact-sub-title { font-weight: bold; color: #555; margin: 15px 0 10px; font-size: 0.85rem; display: block; text-align: left; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-contact { padding: 12px; border-radius: 10px; border: none; color: white; font-weight: bold; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; }
         .btn-messenger { background: var(--messenger); }
         .btn-phone { background: var(--phone); }
 
@@ -136,7 +139,7 @@
             <div class="action-group">
                 <button id="mainMapBtn" onclick="changeStep('step-3', 'step-map-guide')" class="btn-action btn-map-main">📍 Xem Vị Trí & Hướng Dẫn</button>
                 <button id="mainWishBtn" onclick="toggleWishForm()" class="btn-action btn-wish">💌 Gửi Lời Chúc & Xác Nhận</button>
-                <p id="lockMsg" style="color: #e67e22; font-size: 0.8rem; font-style: italic;">Kiệt nhờ bạn gửi lời chúc để mở khóa sơ đồ đường đi nhé! ❤️</p>
+                <p id="lockMsg" style="color: #e67e22; font-size: 0.8rem; font-style: italic;">Kiệt nhờ bạn gửi lời chúc để mở sơ đồ đường đi nhé! ❤️</p>
             </div>
 
             <div id="wish-form-container">
@@ -151,7 +154,7 @@
             </div>
         </div>
         <div class="nav-footer">
-            <button class="btn-nav btn-back" onclick="changeStep('step-3', 'step-2')">← Xem lại thông tin</button>
+            <button class="btn-nav btn-back" onclick="changeStep('step-3', 'step-2')">← Quay lại</button>
         </div>
     </div>
 
@@ -159,13 +162,21 @@
         <div class="guide-header">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</div>
         <img src="bandohuongdan.jpg" class="map-guide-img" alt="Bản đồ hướng dẫn">
         <div class="guide-tools">
-            <a href="https://maps.app.goo.gl/NisW3Q1M5fN7f7iL6" target="_blank" class="btn-tool bg-orange">📍 Xem Bản Đồ</a>
+            <a href="https://www.google.com/maps/contrib/109135867366198761444/reviews" target="_blank" class="btn-tool bg-orange">📍 Xem Bản Đồ</a>
             <a href="bandohuongdan.jpg" download="Huong-Dan-Duong-Di.jpg" class="btn-tool bg-blue">📥 Tải Ảnh Về</a>
         </div>
         <div class="contact-section">
-            <span class="contact-title">Bạn cần hỗ trợ thêm? Liên hệ Kiệt nhé!</span>
+            <span class="contact-header-title">Thông Tin Liên Lạc</span>
+            
+            <span class="contact-sub-title">Chủ buổi lễ (Anh Thư):</span>
             <div class="contact-grid">
-                <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact btn-messenger">💬 Mess cho Kiệt</a>
+                <a href="https://www.facebook.com/van.anhthu.79395" target="_blank" class="btn-contact btn-messenger" style="background: #ff7675;">💬 Nhắn cho Thư</a>
+                <a href="tel:0934839201" class="btn-contact btn-phone" style="background: #fab1a0;">📞 Gọi cho Thư ngay</a>
+            </div>
+
+            <span class="contact-sub-title">Hỗ trợ đường đi (Kiệt):</span>
+            <div class="contact-grid">
+                <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact btn-messenger">💬 Nhắn cho Kiệt</a>
                 <a href="tel:0981537849" class="btn-contact btn-phone">📞 Gọi cho Kiệt ngay</a>
             </div>
         </div>
@@ -234,12 +245,10 @@
 
     function onPostSuccess() {
         if(isSubmitted) {
-            // HIỆN NÚT BẢN ĐỒ Ở CẢ TRANG CHỦ VÀ TRANG CẢM ƠN
             document.querySelectorAll('.btn-map-main').forEach(btn => btn.style.display = 'block');
             document.getElementById('lockMsg').style.display = 'none';
             document.getElementById('mainWishBtn').innerText = "✅ Đã gửi lời chúc";
             document.getElementById('mainWishBtn').disabled = true;
-
             changeStep('step-3', 'step-4');
             confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
