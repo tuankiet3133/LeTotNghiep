@@ -13,10 +13,13 @@
             --text-dark: #333;
             --messenger: #0084ff;
             --phone: #2ecc71;
+            --transition-speed: 0.6s;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
         body { background: #f4f7f9; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; overflow-x: hidden; padding-bottom: 50px; }
+
+        .page-transition { animation: slideUp var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- BƯỚC 0: INTRO --- */
         #step-intro { position: fixed; inset: 0; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 3000; cursor: pointer; overflow: hidden; }
@@ -34,62 +37,54 @@
         /* --- CONTAINER CHUNG --- */
         .wrapper { display: none; width: 100%; max-width: 450px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 20px; }
 
-        /* --- BƯỚC 2: THIỆP MỜI (ẢNH CANVA) --- */
+        /* --- BƯỚC 2: THIỆP MỜI --- */
         .invite-img-container { position: relative; width: 100%; line-height: 0; }
         .invite-img { width: 100%; height: auto; display: block; }
         #guest-name-overlay { position: absolute; top: 11%; left: 50%; transform: translate(calc(-50% - 85px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 1.9rem; font-weight: 500; color: #1a1a1a; z-index: 5; text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1); }
 
         /* --- BƯỚC 3: TRANG TƯƠNG TÁC --- */
         #step-3-content { padding: 40px 25px; text-align: center; }
-        .classic-header p { color: #666; font-size: 0.95rem; }
-        .classic-header h3 { color: var(--primary); font-size: 2rem; margin: 15px 0; } /* Trả lại màu xanh cho tên Anh Thư */
-        
+        .classic-header h3 { color: var(--primary); font-size: 2rem; margin: 15px 0; }
         .countdown-box { background: #f8f9fa; padding: 25px 10px; border-radius: 15px; margin: 30px 0; border: 1px solid #eee; }
         #countdown { display: flex; justify-content: space-around; color: var(--primary); font-weight: bold; }
         .cd-item b { font-size: 1.4rem; display: block; color: var(--gold); }
-        .cd-item span { font-size: 0.7rem; color: #888; }
         
         .action-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-        .btn-action { padding: 15px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-map-main { background: var(--gold); color: white; }
+        .btn-action { padding: 15px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
+        .btn-map-main { background: var(--gold); color: white; display: none; } /* Mặc định ẩn nút Bản đồ */
         .btn-wish { background: var(--primary); color: white; }
 
-        /* --- BƯỚC 3.5: TRANG HƯỚNG DẪN CHI TIẾT --- */
-        #step-map-guide { display: none; padding: 20px; background: #fff; }
-        .guide-header { text-align: center; color: var(--primary); margin-bottom: 20px; font-weight: bold; font-size: 1.2rem; }
-        .map-guide-img { width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .guide-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        /* --- BƯỚC 3.5: TRANG HƯỚNG DẪN --- */
+        #step-map-guide { display: none; padding: 0; background: #fff; }
+        .guide-header { text-align: center; color: var(--primary); padding-top: 20px; font-weight: bold; font-size: 1.2rem; }
+        .map-guide-img { width: 90%; margin: 20px 5%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .guide-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 20px 25px; }
         .btn-tool { padding: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 0.85rem; text-align: center; color: white; display: flex; align-items: center; justify-content: center; gap: 5px; }
         .bg-orange { background: #e67e22; }
         .bg-blue { background: #2980b9; }
 
-        .contact-section { background: #f8f9fa; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
+        .contact-section { background: #f8f9fa; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin: 0 20px 20px; }
         .contact-title { font-weight: bold; color: #555; margin-bottom: 15px; font-size: 0.95rem; display: block; text-align: center; }
-        .contact-grid { display: flex; flex-direction: column; gap: 10px; }
-        .btn-contact { padding: 12px; border-radius: 10px; border: none; color: white; font-weight: bold; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-contact { padding: 12px; border-radius: 10px; border: none; color: white; font-weight: bold; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
         .btn-messenger { background: var(--messenger); }
         .btn-phone { background: var(--phone); }
 
-        /* --- BƯỚC 4: TRANG CẢM ƠN --- */
-        #step-thankyou-content { padding: 70px 30px; text-align: center; background: radial-gradient(circle at top, #ffffff, #fffdf0); }
+        /* --- BƯỚC 4: CẢM ƠN --- */
+        #step-thankyou-content { padding: 70px 30px; text-align: center; }
         .thankyou-heart { font-size: 5rem; margin-bottom: 25px; animation: heartPulse 1.2s infinite ease-in-out; }
-        @keyframes heartPulse { 0%, 100% {transform: scale(1);} 50% {transform: scale(1.1);} }
         .thankyou-msg { font-size: 1.6rem; color: var(--primary); font-weight: bold; line-height: 1.5; margin-bottom: 20px; }
 
-        /* --- FOOTER & NAV --- */
         .nav-footer { display: flex; justify-content: space-between; padding: 20px; background: #fff; border-top: 1px solid #eee; }
-        .btn-nav { padding: 12px 20px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+        .btn-nav { padding: 12px 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
         .btn-back { background: #f0f0f0; color: #666; }
         .btn-next { background: var(--primary); color: white; }
-        
+
         #wish-form-container { display: none; padding-top: 30px; border-top: 2px dashed #eee; margin-top: 30px; text-align: left; }
         #wish-form-container h3 { color: var(--gold); margin-bottom: 15px; text-align: center; }
         .form-input-classic { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; outline: none; font-size: 1rem; display: block; color: var(--text-dark); }
-        .attendance-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        .choice-item { flex: 1; padding: 12px 5px; border: 2px solid #eee; border-radius: 12px; text-align: center; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease; background: #fff; color: #555; }
+        .choice-item { flex: 1; padding: 12px 5px; border: 2px solid #eee; border-radius: 12px; text-align: center; cursor: pointer; font-size: 0.9rem; transition: 0.3s; background: #fff; color: #555; }
         .choice-item.active { border-color: var(--primary); background: #e8f0fe; color: var(--primary); font-weight: bold; }
         .btn-send-final { background: linear-gradient(135deg, #1a73e8, #d4af37); color: white; width: 100%; padding: 16px; border-radius: 30px; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
-        
         #music-btn { position: fixed; bottom: 20px; right: 20px; background: white; border-radius: 50%; width: 50px; height: 50px; display: none; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--gold); z-index: 999; }
     </style>
 </head>
@@ -101,8 +96,8 @@
 
     <div id="step-1">
         <div class="input-box">
-            <h2>Trân trọng kính mời</h2>
-            <input type="text" id="inputGuestName" class="name-field" placeholder="Vui lòng nhập tên của bạn...">
+            <h2>Chương mới của mình cần có mặt</h2>
+            <input type="text" id="inputGuestName" class="name-field" placeholder="Tên bạn ở đây nè...">
             <button class="btn-start" onclick="goToStep2()">Mở thiệp mời</button>
         </div>
     </div>
@@ -117,8 +112,8 @@
             <div id="guest-name-overlay"></div>
         </div>
         <div class="nav-footer">
-            <button class="btn-nav btn-back" onclick="backToStep1()">← Xem lại thông tin</button>
-            <button class="btn-nav btn-next" onclick="goToStep3()">Đi đến buổi lễ →</button>
+            <button class="btn-nav btn-back" onclick="changeStep('step-2', 'step-1')">← Xem lại thông tin</button>
+            <button class="btn-nav btn-next" onclick="changeStep('step-2', 'step-3')">Đi đến buổi lễ →</button>
         </div>
     </div>
 
@@ -137,14 +132,17 @@
                     <div class="cd-item"><b id="seconds">00</b><span>Giây</span></div>
                 </div>
             </div>
+            
             <div class="action-group">
-                <button onclick="goToMapGuide()" class="btn-action btn-map-main">📍 Xem Vị Trí & Hướng Dẫn</button>
-                <button onclick="toggleWishForm()" class="btn-action btn-wish">💌 Gửi Lời Chúc & Xác Nhận</button>
+                <button id="mainMapBtn" onclick="changeStep('step-3', 'step-map-guide')" class="btn-action btn-map-main">📍 Xem Vị Trí & Hướng Dẫn</button>
+                <button id="mainWishBtn" onclick="toggleWishForm()" class="btn-action btn-wish">💌 Gửi Lời Chúc & Xác Nhận</button>
+                <p id="lockMsg" style="color: #e67e22; font-size: 0.8rem; font-style: italic;">Kiệt nhờ bạn gửi lời chúc để mở khóa sơ đồ đường đi nhé! ❤️</p>
             </div>
+
             <div id="wish-form-container">
                 <h3>Gửi Yêu Thương ❤️</h3>
                 <input type="text" id="finalNameInput" class="form-input-classic" readonly style="background: #f9f9f9; color: #666;">
-                <div class="attendance-group">
+                <div class="attendance-group" style="display: flex; gap: 10px; margin-bottom: 20px;">
                     <div class="choice-item" id="opt-yes" onclick="setAttendance('yes', this)">Chắc chắn rồi 😍</div>
                     <div class="choice-item" id="opt-no" onclick="setAttendance('no', this)">Tiếc quá bận mất 🥺</div>
                 </div>
@@ -153,28 +151,26 @@
             </div>
         </div>
         <div class="nav-footer">
-            <button class="btn-nav btn-back" onclick="backToStep2()">← Xem lại thông tin</button>
+            <button class="btn-nav btn-back" onclick="changeStep('step-3', 'step-2')">← Xem lại thông tin</button>
         </div>
     </div>
 
     <div id="step-map-guide" class="wrapper">
-        <div style="padding: 20px;">
-            <div class="guide-header">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</div>
-            <img src="bandohuongdan.jpg" class="map-guide-img" alt="Bản đồ hướng dẫn">
-            <div class="guide-tools">
-                <a href="https://maps.app.goo.gl/U3p4AqYqGYwYeHEp7" target="_blank" class="btn-tool bg-orange">📍 Xem Bản Đồ</a>
-                <a href="bandohuongdan.jpg" download="Huong-Dan-Duong-Di.jpg" class="btn-tool bg-blue">📥 Tải Ảnh Về</a>
-            </div>
-            <div class="contact-section">
-                <span class="contact-title">Bạn cần hỗ trợ thêm? Liên hệ Kiệt nhé!</span>
-                <div class="contact-grid">
-                    <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact btn-messenger">💬 Nhắn cho Kiệt qua Mess</a>
-                    <a href="tel:0981537849" class="btn-contact btn-phone">📞 Gọi cho Kiệt ngay</a>
-                </div>
+        <div class="guide-header">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</div>
+        <img src="bandohuongdan.jpg" class="map-guide-img" alt="Bản đồ hướng dẫn">
+        <div class="guide-tools">
+            <a href="https://maps.app.goo.gl/NisW3Q1M5fN7f7iL6" target="_blank" class="btn-tool bg-orange">📍 Xem Bản Đồ</a>
+            <a href="bandohuongdan.jpg" download="Huong-Dan-Duong-Di.jpg" class="btn-tool bg-blue">📥 Tải Ảnh Về</a>
+        </div>
+        <div class="contact-section">
+            <span class="contact-title">Bạn cần hỗ trợ thêm? Liên hệ Kiệt nhé!</span>
+            <div class="contact-grid">
+                <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact btn-messenger">💬 Mess cho Kiệt</a>
+                <a href="tel:0981537849" class="btn-contact btn-phone">📞 Gọi cho Kiệt ngay</a>
             </div>
         </div>
         <div class="nav-footer">
-            <button class="btn-nav btn-back" onclick="backToStep3()">← Quay lại</button>
+            <button class="btn-nav btn-back" onclick="changeStep('step-map-guide', 'step-3')">← Quay lại trang chủ</button>
         </div>
     </div>
 
@@ -182,7 +178,9 @@
         <div id="step-thankyou-content">
             <div class="thankyou-heart">❤️</div>
             <div class="thankyou-msg">Anh Thư xin Chân Thành Cảm Ơn Bạn ❤️</div>
-            <p style="color: #666; font-style: italic;">Lời chúc và sự hiện diện của bạn là món quà vô giá.</p>
+            <div id="finalActionArea" style="margin-top: 20px;">
+                <button onclick="changeStep('step-4', 'step-map-guide')" class="btn-action btn-map-main" style="display: block; width: 100%; margin: 0 auto;">📍 Xem Sơ Đồ Đường Đi</button>
+            </div>
         </div>
     </div>
 
@@ -190,40 +188,34 @@
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted){onPostSuccess();}"></iframe>
 
 <script>
-    let guestNameVal = "";
-    let selectedAttendance = "";
-    let isSubmitted = false;
-    const audio = document.getElementById('bgMusic');
+    let guestNameVal = ""; let selectedAttendance = ""; let isSubmitted = false; const audio = document.getElementById('bgMusic');
+
+    function changeStep(currentId, nextId) {
+        document.querySelectorAll('.wrapper, #step-1, #step-intro').forEach(el => el.style.display = 'none');
+        const next = document.getElementById(nextId);
+        next.style.display = (nextId === 'step-1' ? 'flex' : 'block');
+        next.classList.remove('page-transition'); void next.offsetWidth; next.classList.add('page-transition');
+        window.scrollTo(0,0);
+    }
 
     function startExperience() {
-        const introImg = document.getElementById('introImg');
-        introImg.classList.add('zoom-out-effect');
-        setTimeout(() => {
-            document.getElementById('step-intro').style.display = 'none';
-            document.getElementById('step-1').style.display = 'flex';
-        }, 1500);
+        document.getElementById('introImg').classList.add('zoom-out-effect');
+        setTimeout(() => changeStep('step-intro', 'step-1'), 1500);
     }
 
     function goToStep2() {
         guestNameVal = document.getElementById('inputGuestName').value.trim();
         if(!guestNameVal) return alert("Kiệt nhờ bạn nhập tên nhé!");
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
         document.getElementById('guest-name-overlay').innerText = guestNameVal;
         document.getElementById('finalNameInput').value = guestNameVal;
+        changeStep('step-1', 'step-2');
         document.getElementById('music-btn').style.display = 'flex';
-        audio.play().catch(e => console.log("Audio blocked"));
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        audio.play().catch(e => {}); confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
     }
 
-    function backToStep1() { document.getElementById('step-2').style.display = 'none'; document.getElementById('step-1').style.display = 'flex'; }
-    function goToStep3() { document.getElementById('step-2').style.display = 'none'; document.getElementById('step-3').style.display = 'block'; }
-    function backToStep2() { document.getElementById('step-3').style.display = 'none'; document.getElementById('step-2').style.display = 'block'; }
-    function goToMapGuide() { document.getElementById('step-3').style.display = 'none'; document.getElementById('step-map-guide').style.display = 'block'; window.scrollTo(0,0); }
-    function backToStep3() { document.getElementById('step-map-guide').style.display = 'none'; document.getElementById('step-3').style.display = 'block'; }
-    function handleToggleMusic() { if (audio.paused) { audio.play(); document.getElementById('music-btn').innerText = '🎵'; } else { audio.pause(); document.getElementById('music-btn').innerText = '🔇'; } }
-    function toggleWishForm() { const form = document.getElementById('wish-form-container'); form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none'; if(form.style.display === 'block') window.scrollBy({ top: 400, behavior: 'smooth' }); }
-    function setAttendance(val, el) { document.querySelectorAll('.choice-item').forEach(item => item.classList.remove('active')); el.classList.add('active'); selectedAttendance = val; }
+    function handleToggleMusic() { audio.paused ? (audio.play(), document.getElementById('music-btn').innerText = '🎵') : (audio.pause(), document.getElementById('music-btn').innerText = '🔇'); }
+    function toggleWishForm() { const f = document.getElementById('wish-form-container'); f.style.display = (f.style.display === 'none' || f.style.display === '') ? 'block' : 'none'; if(f.style.display === 'block') window.scrollBy({ top: 400, behavior: 'smooth' }); }
+    function setAttendance(val, el) { document.querySelectorAll('.choice-item').forEach(i => i.classList.remove('active')); el.classList.add('active'); selectedAttendance = val; }
 
     function processSendWish() {
         const name = document.getElementById('finalNameInput').value;
@@ -236,20 +228,31 @@
         form.action = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
         form.method = 'POST'; form.target = 'hidden_iframe';
         const fields = { 'entry.1447010642': name, 'entry.1364691255': (selectedAttendance === 'yes' ? "Tất nhiên gòi" : "__other_option__"), 'entry.1364691255.other_option_response': (selectedAttendance === 'no' ? "Lí do khác" : ""), 'entry.1020605170': wishText };
-        for (const key in fields) { let input = document.createElement('input'); input.type = 'hidden'; input.name = key; input.value = fields[key]; form.appendChild(input); }
+        for (const k in fields) { let i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = fields[k]; form.appendChild(i); }
         document.body.appendChild(form); form.submit(); document.body.removeChild(form);
     }
 
-    function onPostSuccess() { if(isSubmitted) { document.getElementById('step-3').style.display = 'none'; document.getElementById('step-map-guide').style.display = 'none'; document.getElementById('step-4').style.display = 'block'; confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } }); } }
+    function onPostSuccess() {
+        if(isSubmitted) {
+            // HIỆN NÚT BẢN ĐỒ Ở CẢ TRANG CHỦ VÀ TRANG CẢM ƠN
+            document.querySelectorAll('.btn-map-main').forEach(btn => btn.style.display = 'block');
+            document.getElementById('lockMsg').style.display = 'none';
+            document.getElementById('mainWishBtn').innerText = "✅ Đã gửi lời chúc";
+            document.getElementById('mainWishBtn').disabled = true;
+
+            changeStep('step-3', 'step-4');
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        }
+    }
 
     const graduationDate = new Date("April 24, 2026 15:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime(); const dist = graduationDate - now;
         if (dist < 0) return document.getElementById('countdown').innerHTML = "🎉 LỄ TỐT NGHIỆP ĐANG DIỄN RA! 🎉";
-        document.getElementById('days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-        document.getElementById('hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('minutes').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById('seconds').innerText = Math.floor((dist % (1000 * 60)) / 1000);
+        ['days','hours','minutes','seconds'].forEach((id, i) => {
+            const vals = [Math.floor(dist/(1000*60*60*24)), Math.floor((dist%(1000*60*60*24))/(1000*60*60)), Math.floor((dist%(1000*60*60))/(1000*60)), Math.floor((dist%(1000*60))/1000)];
+            document.getElementById(id).innerText = String(vals[i]).padStart(2, '0');
+        });
     }, 1000);
 </script>
 </body>
