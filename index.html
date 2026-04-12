@@ -4,94 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lễ Tốt Nghiệp - Văn Anh Thư</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Satisfy&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --primary-color: #1a73e8;
+            --primary: #1a73e8;
             --gold: #d4af37;
             --text-dark: #333;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(26, 115, 232, 1);
+
+        body { 
+            background: #f4f7f9; 
+            display: flex; justify-content: center; align-items: flex-start; 
+            min-height: 100vh; overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* --- BƯỚC 1: NHẬP TÊN --- */
+        #step-1 {
+            position: fixed; inset: 0; background: var(--primary);
             display: flex; justify-content: center; align-items: center;
-            z-index: 1000; color: white; cursor: pointer; text-align: center;
+            z-index: 2000; padding: 20px;
+        }
+        .input-box {
+            background: white; padding: 40px 30px; border-radius: 20px;
+            width: 100%; max-width: 380px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .input-box h2 { color: var(--primary); margin-bottom: 25px; font-size: 1.5rem; }
+        .name-field {
+            width: 100%; padding: 15px; border: 2px solid #ddd;
+            border-radius: 12px; margin-bottom: 25px; outline: none; 
+            font-size: 1.1rem; text-align: center;
+        }
+        .btn-start {
+            background: var(--gold); color: white; padding: 16px;
+            border: none; border-radius: 12px; font-weight: bold; 
+            cursor: pointer; width: 100%; font-size: 1rem; text-transform: uppercase;
         }
 
-        #overlay > div { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        #overlay h2 { font-size: 1.8rem; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-
-        .touch-container { position: relative; width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; }
-        .touch-circle {
-            width: 90px; height: 90px; background-color: white; border: 4px solid var(--gold);
-            border-radius: 50%; color: var(--gold); display: flex; justify-content: center; align-items: center;
-            font-size: 1.3rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3); position: absolute; z-index: 2;
-        }
-        .touch-pulse {
-            width: 90px; height: 90px; background-color: transparent; border: 4px solid var(--gold);
-            border-radius: 50%; position: absolute; z-index: 1; opacity: 0.8;
-            animation: pulse-wave 1.8s infinite;
-        }
-        @keyframes pulse-wave {
-            0% { transform: scale(1); opacity: 0.8; }
-            70% { transform: scale(1.6); opacity: 0; }
-            100% { transform: scale(1.6); opacity: 0; }
+        /* --- CONTAINER CHUNG --- */
+        .wrapper {
+            display: none; width: 100%; max-width: 450px; 
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
 
-        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .card { background: white; max-width: 400px; width: 100%; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden; text-align: center; border: 2px solid var(--gold); display: none; }
-        .header { background: var(--primary-color); color: white; padding: 40px 20px 70px 20px; }
-        .header h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .photo-container { margin-top: -60px; margin-bottom: 15px; display: flex; justify-content: center; }
-        .graduation-photo { width: 120px; height: 120px; border-radius: 50%; border: 5px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.2); object-fit: cover; }
-        .content { padding: 0px 20px 30px 20px; }
-        .name {
-            font-size: 1.8rem; margin: 10px 0; font-weight: bold;
-            background: linear-gradient(90deg, #111, #fff, #111);
-            background-size: 200% 100%; -webkit-background-clip: text;
-            background-clip: text; color: transparent; animation: shimmer 2s infinite linear;
+        /* --- BƯỚC 2: THIỆP MỜI --- */
+        .invite-img-container { position: relative; width: 100%; line-height: 0; }
+        .invite-img { width: 100%; height: auto; display: block; }
+        
+        #guest-name-overlay {
+            position: absolute; 
+            top: 11%; 
+            left: 50%;
+            transform: translate(calc(-50% - 85px), 0);
+            width: 90%; 
+            text-align: center; 
+            font-family: 'Great Vibes', cursive; 
+            font-size: 1.9rem; 
+            font-weight: 500;
+            color: #1a1a1a; 
+            text-transform: none; 
+            z-index: 5;
+            text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1);
         }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .quote { font-size: 0.9rem; color: #555; margin-bottom: 25px; font-style: italic; }
-        .info-box { background: #f9f9f9; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: left; }
-        .info-item { margin-bottom: 10px; color: #444; }
-        .info-item strong { color: var(--primary-color); }
-        #countdown { display: flex; justify-content: space-around; color: var(--primary-color); font-weight: bold; margin-top: 10px; }
-        .cd-item { display: flex; flex-direction: column; align-items: center; font-size: 0.9rem; }
+
+        /* --- BƯỚC 3: TRANG TƯƠNG TÁC --- */
+        #step-3-content { padding: 40px 25px; text-align: center; }
+        .classic-header h3 { color: var(--primary); font-size: 1.8rem; margin: 15px 0; }
+        .countdown-box { background: #f8f9fa; padding: 25px 10px; border-radius: 15px; margin: 30px 0; }
+        #countdown { display: flex; justify-content: space-around; color: var(--primary); font-weight: bold; }
+        .cd-item b { font-size: 1.4rem; display: block; color: var(--gold); }
         .cd-item span { font-size: 0.7rem; color: #888; }
-        .action-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 25px; }
-        .btn { display: inline-block; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; width: 100%; transition: 0.3s; text-align: center; border: none; cursor: pointer; }
+
+        .action-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+        .btn-action { padding: 15px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-map { background: var(--gold); color: white; }
-        .btn-wish { background: var(--primary-color); color: white; }
+        .btn-wish { background: var(--primary); color: white; }
 
-        #wish-section { display: none; padding: 20px; background: #fff; border-top: 2px dashed var(--gold); text-align: left; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--primary-color); }
-        .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none; font-size: 1rem; }
-        .form-input:focus { border-color: var(--gold); box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
-        .choice-container { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-        .choice-box { flex: 1; min-width: 120px; padding: 10px; border: 2px solid #eee; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; font-size: 0.9rem; background: #fdfdfd; }
-        .choice-box.active { border-color: var(--primary-color); background: #e8f0fe; color: var(--primary-color); font-weight: bold; }
-        #other-reason-input { display: none; margin-top: 10px; }
-        .btn-send { background: linear-gradient(to right, #1a73e8, #d4af37); color: white; margin-top: 15px; box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3); }
+        /* --- BƯỚC 3.5: MÀN HÌNH HƯỚNG DẪN ĐƯỜNG ĐI --- */
+        #step-map-guide { display: none; width: 100%; max-width: 450px; position: relative; }
+        .map-guide-container { position: relative; width: 100%; line-height: 0; }
+        .map-guide-img { width: 100%; height: auto; display: block; }
+        
+        /* CSS CHO 2 NÚT TRÊN ẢNH */
+        .btn-open-google-maps {
+            position: absolute; top: 15px; right: 15px;
+            background: #e67e22; color: white;
+            padding: 8px 12px; border-radius: 20px;
+            text-decoration: none; font-weight: bold;
+            font-size: 0.75rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10; display: flex; align-items: center; gap: 5px;
+        }
 
-        #music-toggle { position: fixed; bottom: 20px; right: 20px; background: white; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 1px solid var(--gold); z-index: 999; }
+        .btn-download-guide {
+            position: absolute; top: 15px; left: 15px;
+            background: #2980b9; color: white;
+            padding: 8px 12px; border-radius: 20px;
+            text-decoration: none; font-weight: bold;
+            font-size: 0.75rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10; display: flex; align-items: center; gap: 5px;
+        }
+
+        /* --- BƯỚC 4: TRANG CẢM ƠN --- */
+        #step-thankyou-content { padding: 70px 30px; text-align: center; background: radial-gradient(circle at top, #ffffff, #fffdf0); }
+        .thankyou-heart { font-size: 5rem; margin-bottom: 25px; animation: heartPulse 1.2s infinite ease-in-out; }
+        @keyframes heartPulse { 0%, 100% {transform: scale(1);} 50% {transform: scale(1.1);} }
+        .thankyou-msg { font-size: 1.6rem; color: var(--primary); font-weight: bold; line-height: 1.5; margin-bottom: 20px; }
+
+        /* --- ĐIỀU HƯỚNG DƯỚI THIỆP --- */
+        .nav-footer { display: flex; justify-content: space-between; padding: 20px; background: #fff; border-top: 1px solid #eee; }
+        .btn-nav { padding: 12px 25px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+        .btn-back { background: #f0f0f0; color: #666; }
+        .btn-next { background: var(--primary); color: white; }
+
+        /* Form lời chúc */
+        #wish-form-container { display: none; padding-top: 30px; border-top: 2px dashed #eee; margin-top: 30px; text-align: left; }
+        .form-input-classic { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; outline: none; font-size: 1rem; display: block; }
+        .attendance-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .choice-item { flex: 1; padding: 12px 5px; border: 2px solid #eee; border-radius: 12px; text-align: center; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease; background: #fff; }
+        .choice-item.active { border-color: var(--primary); background: #e8f0fe; color: var(--primary); font-weight: bold; }
+        .btn-send-final { background: linear-gradient(135deg, #1a73e8, #d4af37); color: white; width: 100%; padding: 16px; border-radius: 30px; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+
+        #music-btn { position: fixed; bottom: 20px; right: 20px; background: white; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--gold); z-index: 999; }
     </style>
 </head>
 <body>
 
-    <div id="overlay" onclick="startEverything()">
-        <div>
-            <h2>🎓 Xin chào những người bạn của Tôi!</h2>
-            <div class="touch-container">
-                <div class="touch-circle">Chạm❤️</div>
-                <div class="touch-pulse"></div>
-            </div>
-            <p style="font-size: 0.9rem; margin-top: 10px;">Chạm khẽ tim tôi để xem nhé</p>
+    <div id="step-1">
+        <div class="input-box">
+            <h2>Trân trọng kính mời</h2>
+            <input type="text" id="inputGuestName" class="name-field" placeholder="Vui lòng nhập tên của bạn...">
+            <button class="btn-start" onclick="goToStep2()">Mở thiệp mời</button>
         </div>
     </div>
 
@@ -99,23 +146,26 @@
         <source src="nhac-le-tot-nghiep.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="card" id="mainCard">
-        <div class="header">
-            <h1>Lễ Tốt Nghiệp</h1>
-            <p>Graduation Invitation</p>
+    <div id="step-2" class="wrapper">
+        <div class="invite-img-container">
+            <img src="background-card.jpg" class="invite-img" alt="Thiệp mời">
+            <div id="guest-name-overlay"></div>
         </div>
-        <div class="photo-container">
-            <img src="Pon.jpg" alt="Văn Anh Thư" class="graduation-photo">
+        <div class="nav-footer">
+            <button class="btn-nav btn-back" onclick="backToStep1()">← Quay lại</button>
+            <button class="btn-nav btn-next" onclick="goToStep3()">Tiếp theo →</button>
         </div>
-        <div class="content" id="cardContent">
-            <p>Trân trọng kính mời bạn đến dự lễ tốt nghiệp của</p>
-            <div class="name">Văn Anh Thư</div>
-            <div class="school">UFM - Trường Đại học Tài chính - Marketing</div>
-            <p class="quote">“Tương lai thuộc về những ai tin tưởng vào vẻ đẹp của những ước mơ.”</p>
-            <div class="info-box">
-                <div class="info-item">📅 <strong>Ngày:</strong> 24/04/2026</div>
-                <div class="info-item">⏰ <strong>Thời gian:</strong> 15:00 PM</div>
-                <div class="info-item">📍 <strong>Địa điểm:</strong> Cơ sở Long Trường</div>
+    </div>
+
+    <div id="step-3" class="wrapper">
+        <div id="step-3-content">
+            <div class="classic-header">
+                <p>Trân trọng kính mời bạn đến dự lễ tốt nghiệp của</p>
+                <h3>Văn Anh Thư</h3>
+                <p style="font-style: italic; color: #666; font-size: 0.9rem;">"Hành trình mới bắt đầu từ sự hiện diện của bạn"</p>
+            </div>
+
+            <div class="countdown-box">
                 <div id="countdown">
                     <div class="cd-item"><b id="days">00</b><span>Ngày</span></div>
                     <div class="cd-item"><b id="hours">00</b><span>Giờ</span></div>
@@ -123,162 +173,135 @@
                     <div class="cd-item"><b id="seconds">00</b><span>Giây</span></div>
                 </div>
             </div>
-            <div class="action-buttons">
-                <a href="https://maps.google.com/?cid=6418638050374426399&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn btn-map">Xem Vị Trí</a>
-                <button onclick="showWishForm()" class="btn btn-wish">Gửi lời chúc & Xác nhận 💌</button>
+
+            <div class="action-group">
+                <button onclick="goToMapGuide()" class="btn-action btn-map">📍 Xem Vị Trí Buổi Lễ</button>
+                <button onclick="toggleWishForm()" class="btn-action btn-wish">💌 Gửi Lời Chúc & Xác Nhận</button>
+            </div>
+
+            <div id="wish-form-container">
+                <h3 style="text-align:center; color: var(--gold);">Gửi Yêu Thương ❤️</h3>
+                <input type="text" id="finalNameInput" class="form-input-classic" readonly style="background: #f9f9f9; color: #666;">
+                <div class="attendance-group">
+                    <div class="choice-item" id="opt-yes" onclick="setAttendance('yes', this)">Chắc chắn rồi 😍</div>
+                    <div class="choice-item" id="opt-no" onclick="setAttendance('no', this)">Tiếc quá bận mất 🥺</div>
+                </div>
+                <textarea id="finalWishText" class="form-input-classic" rows="4" placeholder="Viết lời chúc dành cho Anh Thư..."></textarea>
+                <button id="finalSubmitBtn" onclick="processSendWish()" class="btn-send-final">Gửi Lời Chúc</button>
             </div>
         </div>
-
-        <div id="wish-section">
-            <h3 style="text-align:center; color: var(--gold); margin-bottom: 15px;">Gửi Yêu Thương ❤️</h3>
-            <div class="form-group">
-                <label>Tên của Bạn ?</label>
-                <input type="text" id="guestName" class="form-input" placeholder="Nhập tên của bạn...">
-            </div>
-            <div class="form-group">
-                <label>Bạn có đến dự lễ hong?</label>
-                <div class="choice-container">
-                    <div class="choice-box" id="choice-yes" onclick="selectChoice('yes', this)">Tất nhiên gòi 😍</div>
-                    <div class="choice-box" id="choice-no" onclick="selectChoice('no', this)">LÍ DO KHÁC 🥺</div>
-                </div>
-                <textarea id="other-reason-input" class="form-input" rows="3" placeholder="Viết lời chúc dành cho Anh Thư nhé..."></textarea>
-            </div>
-            <button id="sendBtn" onclick="sendWish()" class="btn btn-send">Gửi Lời Chúc</button>
-            <p onclick="showWishForm()" style="text-align:center; font-size:0.8rem; margin-top:20px; cursor:pointer; color:#888;">Quay lại</p>
+        <div class="nav-footer">
+            <button class="btn-nav btn-back" onclick="backToStep2()">← Quay lại</button>
         </div>
     </div>
 
-    <div id="music-toggle" onclick="toggleMusic()" style="display: none;">🎵</div>
+    <div id="step-map-guide" class="wrapper">
+        <div class="map-guide-container">
+            <img src="bandohuongdan.jpg" class="map-guide-img" alt="Hướng dẫn đường đi">
+            
+            <a href="bandohuongdan.jpg" download="Ban-Do-UFM-Long-Truong.jpg" class="btn-download-guide">
+                📥 Tải Về Coi
+            </a>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){handleSuccess();}"></iframe>
+            <a href="https://www.google.com/maps/search/?api=1&query=Đại+học+Tài+chính+Marketing+Cơ+sở+Long+Trường" target="_blank" class="btn-open-google-maps">
+                🗺️ Xem Bản Đồ
+            </a>
+        </div>
+        <div class="nav-footer">
+            <button class="btn-nav btn-back" onclick="backToStep3()">← Quay lại</button>
+        </div>
+    </div>
+
+    <div id="step-4" class="wrapper">
+        <div id="step-thankyou-content">
+            <div class="thankyou-heart">❤️</div>
+            <div class="thankyou-msg">Anh Thư xin Chân Thành Cảm Ơn Bạn ❤️</div>
+            <p class="thankyou-sub">Lời chúc và sự hiện diện của bạn là món quà vô giá đối với Thư trong ngày lễ trọng đại này.</p>
+            <p style="color: var(--gold); font-weight: bold; letter-spacing: 1px;">✨ HẸN SỚM GẶP LẠI BẠN NHÉ! ✨</p>
+        </div>
+    </div>
+
+    <div id="music-btn" onclick="handleToggleMusic()" style="display: none;">🎵</div>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted){onPostSuccess();}"></iframe>
 
 <script>
-    const music = document.getElementById('bgMusic');
-    const overlay = document.getElementById('overlay');
-    const card = document.getElementById('mainCard');
-    const musicBtn = document.getElementById('music-toggle');
-    let attendance = "";
-    let submitted = false;
+    let guestNameVal = "";
+    let selectedAttendance = "";
+    let isSubmitted = false;
+    const audio = document.getElementById('bgMusic');
 
-    function startEverything() {
-        overlay.style.display = 'none';
-        card.style.display = 'block';
-        musicBtn.style.display = 'flex';
-        music.play().catch(e => console.log("Audio play failed", e));
-        (function frame() {
-            confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#1a73e8', '#d4af37'] });
-            confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#1a73e8', '#d4af37'] });
-            requestAnimationFrame(frame);
-        }());
+    function goToStep2() {
+        guestNameVal = document.getElementById('inputGuestName').value.trim();
+        if(!guestNameVal) return alert("Kiệt nhờ bạn nhập tên để ghi vào thiệp nhé!");
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+        document.getElementById('guest-name-overlay').innerText = guestNameVal;
+        document.getElementById('finalNameInput').value = guestNameVal;
+        document.getElementById('music-btn').style.display = 'flex';
+        audio.play().catch(e => console.log("Audio blocked"));
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
     }
 
-    function toggleMusic() {
-        if (music.paused) { music.play(); musicBtn.innerText = '🎵'; } 
-        else { music.pause(); musicBtn.innerText = '🔇'; }
+    function backToStep1() { document.getElementById('step-2').style.display = 'none'; document.getElementById('step-1').style.display = 'flex'; }
+    function goToStep3() { document.getElementById('step-2').style.display = 'none'; document.getElementById('step-3').style.display = 'block'; }
+    function backToStep2() { document.getElementById('step-3').style.display = 'none'; document.getElementById('step-2').style.display = 'block'; }
+    function goToMapGuide() { document.getElementById('step-3').style.display = 'none'; document.getElementById('step-map-guide').style.display = 'block'; window.scrollTo(0, 0); }
+    function backToStep3() { document.getElementById('step-map-guide').style.display = 'none'; document.getElementById('step-3').style.display = 'block'; }
+
+    function handleToggleMusic() {
+        if (audio.paused) { audio.play(); document.getElementById('music-btn').innerText = '🎵'; } 
+        else { audio.pause(); document.getElementById('music-btn').innerText = '🔇'; }
     }
 
-    function showWishForm() {
-        const content = document.getElementById('cardContent');
-        const wishSection = document.getElementById('wish-section');
-        if (wishSection.style.display === 'none' || wishSection.style.display === '') {
-            content.style.display = 'none';
-            wishSection.style.display = 'block';
-        } else {
-            content.style.display = 'block';
-            wishSection.style.display = 'none';
-        }
+    function toggleWishForm() {
+        const form = document.getElementById('wish-form-container');
+        form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+        if(form.style.display === 'block') window.scrollBy({ top: 400, behavior: 'smooth' });
     }
 
-    function selectChoice(val, el) {
-        document.querySelectorAll('.choice-box').forEach(box => box.classList.remove('active'));
+    function setAttendance(val, el) {
+        document.querySelectorAll('.choice-item').forEach(item => item.classList.remove('active'));
         el.classList.add('active');
-        attendance = val;
-        // Hiển thị textarea trong cả 2 trường hợp để người dùng viết lời chúc
-        document.getElementById('other-reason-input').style.display = 'block';
+        selectedAttendance = val;
     }
 
-    function handleSuccess() {
-        if(submitted) {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#1a73e8', '#d4af37'] });
-            alert("Gửi thành công! Lời chúc đã bay đến Anh Thư rồi nhé ❤️");
-            document.getElementById('guestName').value = "";
-            document.getElementById('other-reason-input').value = "";
-            attendance = "";
-            document.querySelectorAll('.choice-box').forEach(box => box.classList.remove('active'));
-            document.getElementById('sendBtn').innerText = "Gửi Lời Chúc";
-            document.getElementById('sendBtn').disabled = false;
-            submitted = false;
-            showWishForm();
-        }
-    }
-
-    function sendWish() {
-        const name = document.getElementById('guestName').value;
-        const wishText = document.getElementById('other-reason-input').value;
-        const btn = document.getElementById('sendBtn');
-
-        if (!name) { alert("Bạn ơi, cho Thư xin cái tên nhé!"); return; }
-        if (!attendance) { alert("Chọn giúp Thư xem bạn có đến được không nè!"); return; }
-        if (!wishText) { alert("Hãy viết vài dòng lời chúc cho Thư nhé!"); return; }
-
-        btn.innerText = "Đang gửi...";
+    function processSendWish() {
+        const name = document.getElementById('finalNameInput').value;
+        const wishText = document.getElementById('finalWishText').value;
+        if (!name || !selectedAttendance || !wishText) return alert("Kiệt nhờ bạn điền đủ thông tin nhé!");
+        const btn = document.getElementById('finalSubmitBtn');
+        btn.innerText = "Đang gửi đi...";
         btn.disabled = true;
-        submitted = true;
-
-        const FORM_ID = "1FAIpQLScRt2Ln2NH1rbyaETmzkp3VaYzaGAZZUhhR1XgRF0yyf5XGSQ";
+        isSubmitted = true;
+        const GOOGLE_FORM_ID = "1FAIpQLScRt2Ln2NH1rbyaETmzkp3VaYzaGAZZUhhR1XgRF0yyf5XGSQ";
         const form = document.createElement('form');
-        form.action = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+        form.action = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
         form.method = 'POST';
         form.target = 'hidden_iframe';
-
-        // LOGIC MAPPING CHÍNH XÁC THEO FORM CỦA KIỆT
-        // Câu 1: entry.1447010642 -> Tên
-        // Câu 2: entry.1364691255 -> Trắc nghiệm
-        // Câu 3: entry.1020605170 -> Viết lời chúc
-        
-        let attendanceValue = "";
-        let otherOptionValue = "";
-
-        if (attendance === 'yes') {
-            attendanceValue = "Tất nhiên gòi"; // KHÔNG CÓ EMOJI, KHỚP 100% VỚI FORM
-        } else {
-            attendanceValue = "__other_option__";
-            otherOptionValue = "Lí do khác"; // Gửi vào ô 'Mục khác'
+        const fields = { 'entry.1447010642': name, 'entry.1364691255': (selectedAttendance === 'yes' ? "Tất nhiên gòi" : "__other_option__"), 'entry.1364691255.other_option_response': (selectedAttendance === 'no' ? "Lí do khác" : ""), 'entry.1020605170': wishText };
+        for (const key in fields) {
+            let input = document.createElement('input'); input.type = 'hidden'; input.name = key; input.value = fields[key]; form.appendChild(input);
         }
-
-        const data = {
-            'entry.1447010642': name,
-            'entry.1364691255': attendanceValue,
-            'entry.1364691255.other_option_response': otherOptionValue,
-            'entry.1020605170': wishText
-        };
-
-        for (const key in data) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = data[key];
-            form.appendChild(input);
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
+        document.body.appendChild(form); form.submit(); document.body.removeChild(form);
     }
 
-    var countDownDate = new Date("April 24, 2026 15:00:00").getTime();
-    var x = setInterval(function() {
-        var now = Date.now();
-        var distance = countDownDate - now;
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "<b style='width:100%; color:#1a73e8;'>🎉 Buổi lễ đang diễn ra! 🎉</b>";
-            return;
+    function onPostSuccess() {
+        if(isSubmitted) {
+            document.getElementById('step-3').style.display = 'none';
+            document.getElementById('step-4').style.display = 'block';
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
-        document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+    }
+
+    const graduationDate = new Date("April 24, 2026 15:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const dist = graduationDate - now;
+        if (dist < 0) return document.getElementById('countdown').innerHTML = "🎉 LỄ TỐT NGHIỆP ĐANG DIỄN RA! 🎉";
+        document.getElementById('days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+        document.getElementById('hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('minutes').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('seconds').innerText = Math.floor((dist % (1000 * 60)) / 1000);
     }, 1000);
 </script>
 </body>
