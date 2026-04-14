@@ -10,119 +10,99 @@
         :root {
             --primary: #1a73e8;
             --gold: #d4af37;
-            --gold-light: #f4e1a1;
-            --text-dark: #333;
-            --messenger: #0084ff;
-            --phone: #2ecc71;
-            --transition-speed: 0.6s;
+            --gold-dark: #b8860b;
             --glass: rgba(255, 255, 255, 0.85);
+            --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         
-        body { background: #121212; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+        body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
 
         .mobile-viewport {
             width: 100%; height: 100vh; max-width: 450px; 
-            background: #f4f7f9; position: relative;
-            display: flex; flex-direction: column;
-            overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            background: #f4f7f9;
+            position: relative; display: flex; flex-direction: column;
+            overflow: hidden; box-shadow: 0 0 60px rgba(0,0,0,0.6);
         }
 
-        .page-transition { animation: slideUp var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .page-transition { animation: slideUp var(--transition) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
         #music-btn { 
             background: var(--glass); backdrop-filter: blur(10px);
             border: 1.5px solid var(--gold); border-radius: 50%; 
             width: 45px; height: 45px; display: none; 
             justify-content: center; align-items: center; cursor: pointer; 
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 5000; font-size: 1.2rem;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); z-index: 5000; font-size: 1.2rem;
         }
-        .music-spinning { animation: spin 3s linear infinite; }
+        .music-spinning { animation: spin 4s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+        /* Step 0: Intro */
         #step-intro { position: absolute; inset: 0; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 3000; cursor: pointer; }
-        .intro-img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s ease-in, opacity 1.5s ease-in; }
-        .zoom-out-effect { transform: scale(8); opacity: 0; }
+        .intro-img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease-in; }
+        .zoom-out-effect { transform: scale(10); opacity: 0; }
 
-        #step-1 { 
-            position: absolute; inset: 0; display: none; 
-            flex-direction: column; justify-content: flex-end; align-items: center; 
-            padding-bottom: 150px; z-index: 2000; 
-        }
-        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.2); z-index: -1; }
-        
+        /* Step 1: Nhập tên */
+        #step-1 { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 120px; z-index: 2000; }
+        .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+        .video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: -1; }
         .input-box { 
-            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); 
-            border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); 
-            text-align: center; border: 1px solid rgba(255, 255, 255, 0.4);
-            width: 65%; max-width: 240px; padding: 35px 25px; 
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); 
+            border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+            text-align: center; border: 1px solid rgba(255,255,255,0.4);
+            width: 70%; max-width: 280px; padding: 40px 25px; 
         }
-        .input-box h2 { color: #111; margin-bottom: 25px; font-size: 1.15rem; font-weight: 800; line-height: 1.4; }
-        .name-field { width: 100%; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; margin-bottom: 25px; outline: none; text-align: center; background: rgba(255,255,255,0.9); font-weight: bold; padding: 14px; font-size: 1rem; }
-        .btn-start { background: linear-gradient(135deg, var(--gold), #b8860b); color: white; padding: 16px; border: none; border-radius: 12px; font-weight: bold; width: 100%; text-transform: uppercase; cursor: pointer; box-shadow: 0 5px 15px rgba(184, 134, 11, 0.4); }
+        .input-box h2 { font-size: 1.2rem; color: #111; margin-bottom: 25px; font-weight: 800; }
+        .name-field { width: 100%; border: 1px solid #ddd; border-radius: 15px; margin-bottom: 25px; outline: none; text-align: center; background: #fff; font-weight: bold; padding: 15px; font-size: 1rem; }
+        .btn-start { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; padding: 16px; border: none; border-radius: 15px; font-weight: 800; width: 100%; text-transform: uppercase; cursor: pointer; }
 
-        .wrapper { display: none; flex-direction: column; width: 100%; height: 100%; background: white; overflow-y: auto; }
-        
-        /* SIÊU GIAO DIỆN STEP 3 */
-        #step-3 { background: linear-gradient(180deg, #f0f4f8 0%, #ffffff 100%); position: relative; }
-        #step-3::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 250px; background: linear-gradient(135deg, rgba(26, 115, 232, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%); clip-path: ellipse(80% 50% at 50% 0%); z-index: 0; }
-        
-        .step-content-centered { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 25px; z-index: 1; }
+        /* Wrappers */
+        .wrapper { display: none; flex-direction: column; width: 100%; height: 100%; background: #f8f9fa; overflow-y: auto; }
+        .step-content-centered { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 20px; }
 
-        .invite-img-container { position: relative; width: 92%; line-height: 0; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.15); border: 2px solid white; }
-        .invite-img { width: 100%; height: auto; display: block; }
-        #guest-name-overlay { position: absolute; top: 11%; left: 50%; transform: translate(calc(-50% - 85px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 2rem; color: #1a1a1a; text-shadow: 0 2px 4px rgba(255,255,255,0.8); }
+        /* Step 2: Thiệp chính */
+        .invite-img-container { position: relative; width: 95%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 4px solid #fff; }
+        .invite-img { width: 100%; display: block; }
+        #guest-name-overlay { position: absolute; top: 11%; left: 50%; transform: translate(calc(-50% - 85px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #1a1a1a; }
 
-        .classic-header { width: 100%; margin-bottom: 25px; }
-        .classic-header p { font-size: 0.95rem; color: #555; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; }
-        .classic-header h3 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 0px rgba(0,0,0,0.05); }
-        
+        /* Step 3: Nội dung */
+        .classic-header h3 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 3.2rem; margin: 10px 0 25px 0; text-align: center; width: 100%; }
         .countdown-card { 
-            background: var(--glass); backdrop-filter: blur(10px); 
-            padding: 25px 15px; border-radius: 25px; margin-bottom: 30px; 
-            border: 1px solid rgba(255,255,255,0.6); width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05), inset 0 0 20px rgba(255,255,255,0.5);
+            background: var(--glass); backdrop-filter: blur(15px); padding: 25px 15px; 
+            border-radius: 25px; margin-bottom: 30px; width: 100%;
+            border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 15px 35px rgba(0,0,0,0.05);
         }
         #countdown { display: flex; justify-content: space-around; }
-        .cd-item { flex: 1; text-align: center; }
-        .cd-item b { font-size: 1.8rem; display: block; color: var(--primary); font-weight: 800; line-height: 1; margin-bottom: 5px; }
-        .cd-item span { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        .cd-item b { font-size: 1.8rem; display: block; color: var(--primary); line-height: 1; margin-bottom: 5px; }
+        .cd-item span { font-size: 0.7rem; color: #888; text-transform: uppercase; }
 
-        .btn-action { 
-            width: 100%; padding: 18px; border-radius: 50px; font-weight: 800; border: none; 
-            margin-bottom: 15px; cursor: pointer; display: flex; align-items: center; 
-            justify-content: center; gap: 12px; text-decoration: none; font-size: 0.95rem;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-action:active { transform: scale(0.95); }
-        .btn-map-main { background: linear-gradient(135deg, var(--gold), #b8860b); color: white; display: none; box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3); }
-        .btn-wish { background: linear-gradient(135deg, var(--primary), #0d47a1); color: white; box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3); }
-        .btn-exit { background: #455a64; color: white; margin-top: 20px; }
+        .btn-action { width: 100%; padding: 18px; border-radius: 50px; font-weight: 800; border: none; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; transition: 0.3s; }
+        .btn-map-main { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; display: none; }
+        .btn-wish { background: linear-gradient(135deg, var(--primary), #0d47a1); color: white; }
 
-        #wish-form-container { 
-            display: none; width: 100%; margin-top: 25px; padding: 25px; 
-            background: white; border-radius: 20px; box-shadow: 0 -10px 30px rgba(0,0,0,0.03);
-            border: 1px dashed var(--gold); animation: fadeIn 0.5s ease;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        #wish-form-container { display: none; width: 100%; margin-top: 25px; padding: 25px; background: #fff; border-radius: 25px; border: 1.5px dashed var(--gold); }
+        .form-input-classic { width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; margin-bottom: 15px; outline: none; }
 
-        .form-input-classic { width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; margin-bottom: 15px; outline: none; background: #fafafa; transition: 0.3s; }
-        .form-input-classic:focus { border-color: var(--gold); background: white; }
-        .choice-grid { display: flex; gap: 12px; margin-bottom: 15px; }
-        .choice-item { flex: 1; padding: 12px; border: 1.5px solid #eee; border-radius: 12px; text-align: center; cursor: pointer; font-size: 0.85rem; font-weight: bold; background: white; transition: 0.3s; }
-        .choice-item.active { border-color: var(--primary); background: #eef5ff; color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26, 115, 232, 0.1); }
+        /* Step Map - Fix lỗi CSS trang cuối */
+        #step-map-guide { background: #f4f7f9; }
+        .map-container { padding: 25px; display: flex; flex-direction: column; align-items: center; }
+        .map-guide-img { width: 100%; border-radius: 20px; margin-bottom: 20px; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .contact-grid { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
+        .contact-card { background: #fff; border-radius: 20px; padding: 20px; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .contact-card.host { border-left: 6px solid var(--gold); }
+        .contact-card.assistant { border-left: 6px solid var(--primary); }
+        .contact-title { font-size: 0.75rem; color: #999; text-transform: uppercase; font-weight: 800; margin-bottom: 5px; display: block; }
+        .contact-name { font-size: 1.1rem; font-weight: bold; color: #222; margin-bottom: 15px; display: block; }
 
-        .nav-footer { padding: 15px 20px; background: var(--glass); backdrop-filter: blur(10px); border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
-        .btn-nav { padding: 12px 20px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
-        .btn-back { background: #eee; color: #666; }
-        .btn-next { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2); }
+        .btn-contact { display: block; padding: 12px; border-radius: 12px; color: #fff; text-align: center; text-decoration: none; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; transition: 0.3s; }
+        .btn-contact.ms { background: #0084ff; }
+        .btn-contact.ph { background: #2ecc71; }
+        .btn-exit { background: #37474f; color: #fff; margin-top: 10px; width: 100%; }
 
-        .map-guide-img { width: 100%; border-radius: 20px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 3px solid white; }
-        .contact-card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; }
-        .contact-card.host { border-left: 5px solid var(--gold); }
-        .contact-card.assistant { border-left: 5px solid var(--primary); }
+        .nav-footer { padding: 15px 20px; background: var(--glass); backdrop-filter: blur(10px); border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; bottom: 0; width: 100%; }
+        .btn-nav { padding: 12px 22px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -135,13 +115,11 @@
         </div>
 
         <div id="step-1">
-            <video autoplay muted loop playsinline class="video-bg">
-                <source src="background-video.mp4" type="video/mp4">
-            </video>
+            <video autoplay muted loop playsinline class="video-bg"><source src="background-video.mp4" type="video/mp4"></video>
             <div class="video-overlay"></div>
             <div class="input-box">
                 <h2>Chương mới của mình cần có mặt</h2>
-                <input type="text" id="inputGuestName" class="name-field" placeholder="Tên bạn là gì nè?">
+                <input type="text" id="inputGuestName" class="name-field" placeholder="Tên của bạn là...">
                 <button class="btn-start" onclick="goToStep2()">Mở thiệp mời</button>
             </div>
         </div>
@@ -156,19 +134,18 @@
                 </div>
             </div>
             <div class="nav-footer">
-                <button class="btn-nav btn-back" onclick="changeStep('step-2', 'step-1')">← Xem lại</button>
+                <button class="btn-nav" style="background:#eee;color:#666" onclick="changeStep('step-2', 'step-1')">← Xem lại</button>
                 <div id="music-pos-2"></div>
-                <button class="btn-nav btn-next" onclick="changeStep('step-2', 'step-3')">Đến buổi lễ →</button>
+                <button class="btn-nav" style="background:var(--primary);color:#fff" onclick="changeStep('step-2', 'step-3')">Đến buổi lễ →</button>
             </div>
         </div>
 
         <div id="step-3" class="wrapper">
             <div class="step-content-centered">
                 <div class="classic-header">
-                    <p>Trân trọng kính mời bạn đến dự lễ tốt nghiệp của</p>
+                    <p style="text-align:center; letter-spacing:3px; color:#888">Trân trọng kính mời</p>
                     <h3>Văn Anh Thư</h3>
                 </div>
-                
                 <div class="countdown-card">
                     <div id="countdown">
                         <div class="cd-item"><b id="days">00</b><span>Ngày</span></div>
@@ -177,72 +154,68 @@
                         <div class="cd-item"><b id="seconds">00</b><span>Giây</span></div>
                     </div>
                 </div>
-
                 <button id="mainWishBtn" onclick="toggleWishForm()" class="btn-action btn-wish">💌 Gửi Lời Chúc & Xác Nhận</button>
                 <button id="mainMapBtn" onclick="changeStep('step-3', 'step-map-guide')" class="btn-action btn-map-main">📍 Xem Vị Trí & Hướng Dẫn</button>
-                
-                <p id="lockMsg" style="color: #e67e22; font-size: 0.85rem; margin-top: 15px; font-style: italic; background: rgba(230, 126, 34, 0.1); padding: 8px 15px; border-radius: 10px;">
+                <p id="lockMsg" style="color:#e67e22; font-size:0.85rem; margin-top:15px; font-style:italic; background:rgba(230,126,34,0.1); padding:10px 20px; border-radius:15px; text-align:center;">
                     Thư nhờ bạn gửi lời chúc để mở sơ đồ nhé! ❤️
                 </p>
-
                 <div id="wish-form-container">
-                    <input type="text" id="finalNameInput" class="form-input-classic" readonly style="background:#f5f5f5; color:#999;">
-                    <div class="choice-grid">
-                        <div class="choice-item" id="opt-yes" onclick="setAttendance('yes', this)">Chắc chắn rồi 😍</div>
-                        <div class="choice-item" id="opt-no" onclick="setAttendance('no', this)">Tiếc quá bận mất 🥺</div>
+                    <input type="text" id="finalNameInput" class="form-input-classic" readonly style="color:#999">
+                    <div style="display:flex; gap:12px; margin-bottom:15px;">
+                        <div class="choice-item" style="flex:1;padding:12px;border:1.5px solid #eee;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;background:#fff" id="opt-yes" onclick="setAttendance('yes', this)">Sẽ đến dự 😍</div>
+                        <div class="choice-item" style="flex:1;padding:12px;border:1.5px solid #eee;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;background:#fff" id="opt-no" onclick="setAttendance('no', this)">Tiếc quá bận mất 🥺</div>
                     </div>
-                    <textarea id="finalWishText" class="form-input-classic" rows="3" placeholder="Lời chúc của bạn dành cho Thư..."></textarea>
-                    <button id="finalSubmitBtn" onclick="processSendWish()" class="btn-start">Gửi Lời Chúc Ngay</button>
+                    <textarea id="finalWishText" class="form-input-classic" rows="3" placeholder="Lời chúc của bạn..."></textarea>
+                    <button id="finalSubmitBtn" onclick="processSendWish()" class="btn-start" style="width:100%">Xác nhận gửi</button>
                 </div>
             </div>
             <div class="nav-footer" id="mainFooter">
-                <button class="btn-nav btn-back" onclick="changeStep('step-3', 'step-2')">← Quay lại</button>
+                <button class="btn-nav" style="background:#eee;color:#666" onclick="changeStep('step-3', 'step-2')">← Quay lại</button>
                 <div id="music-pos-3"></div>
-                <div style="flex:1; max-width:120px;"></div>
+                <div style="width:80px"></div>
             </div>
         </div>
 
         <div id="step-map-guide" class="wrapper">
-            <div style="padding: 25px;">
-                <h3 style="text-align: center; color: var(--primary); font-weight: 900; letter-spacing: 1px; margin-bottom: 15px;">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</h3>
+            <div class="map-container">
+                <h3 style="text-align:center; color:var(--primary); font-weight:900; margin-bottom:20px; letter-spacing:1px;">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</h3>
                 <img src="bandohuongdan.jpg" class="map-guide-img">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom: 25px;">
-                    <a href="https://maps.google.com" target="_blank" class="btn-action btn-wish" style="margin:0;">📍 Google Maps</a>
-                    <a href="bandohuongdan.jpg" download class="btn-action" style="margin:0; background:#2980b9; color:white;">📥 Tải Ảnh</a>
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:25px; width:100%;">
+                    <a href="https://maps.google.com" target="_blank" class="btn-action btn-wish" style="margin:0">📍 Google Maps</a>
+                    <a href="bandohuongdan.jpg" download class="btn-action" style="margin:0; background:#2980b9; color:#fff">📥 Tải Ảnh</a>
                 </div>
 
                 <div class="contact-grid">
                     <div class="contact-card host">
                         <span class="contact-title">Chủ buổi lễ</span>
                         <span class="contact-name">Văn Anh Thư</span>
-                        <a href="https://www.facebook.com/van.anhthu.79395" target="_blank" class="btn-contact btn-messenger">💬 Nhắn cho Thư</a>
-                        <a href="tel:0934839201" class="btn-contact btn-phone">📞 Gọi cho Thư</a>
+                        <a href="https://www.facebook.com/van.anhthu.79395" target="_blank" class="btn-contact ms">💬 Nhắn cho Thư</a>
+                        <a href="tel:0934839201" class="btn-contact ph">📞 Gọi cho Thư</a>
                     </div>
-
                     <div class="contact-card assistant">
                         <span class="contact-title">Trợ lí</span>
                         <span class="contact-name">Tuấn Kiệt</span>
-                        <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact btn-messenger">💬 Nhắn cho Kiệt</a>
-                        <a href="tel:0981537849" class="btn-contact btn-phone">📞 Gọi cho Kiệt</a>
+                        <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact ms">💬 Nhắn cho Kiệt</a>
+                        <a href="tel:0981537849" class="btn-contact ph">📞 Gọi cho Kiệt</a>
                     </div>
                 </div>
-
                 <button onclick="handleExitInvite()" class="btn-action btn-exit">Thoát</button>
             </div>
             <div class="nav-footer" id="mapFooter">
-                <button class="btn-nav btn-back" id="btnBackMap" onclick="handleBackFromMap()">← Quay lại</button>
+                <button class="btn-nav" style="background:#eee;color:#666" id="btnBackMap" onclick="handleBackFromMap()">← Quay lại</button>
                 <div id="music-pos-map"></div>
-                <div style="flex:1; max-width:120px;"></div>
+                <div style="width:80px"></div>
             </div>
         </div>
 
         <div id="step-4" class="wrapper">
             <div class="step-content-centered">
-                <div style="background: white; padding: 40px 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); text-align: center;">
-                    <h1 style="font-size: 5rem; margin-bottom: 10px;">❤️</h1>
-                    <h2 style="color: var(--primary); font-weight: 900; margin-bottom: 15px;">Cảm ơn bạn!</h2>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 30px;">Lời chúc của bạn đã được Thư nhận rồi nhé. Hẹn gặp bạn tại buổi lễ!</p>
-                    <button onclick="changeStep('step-4', 'step-map-guide')" class="btn-action btn-map-main" style="display:flex;">📍 Xem Sơ Đồ Đường Đi</button>
+                <div style="background:#fff; padding:40px 30px; border-radius:30px; box-shadow:0 20px 60px rgba(0,0,0,0.1); text-align:center; width:90%">
+                    <h1 style="font-size:5rem; margin-bottom:10px">❤️</h1>
+                    <h2 style="color:var(--primary); font-weight:900; margin-bottom:15px">Cảm ơn bạn!</h2>
+                    <p style="color:#666; line-height:1.6; margin-bottom:30px">Lời chúc đã được Thư nhận rồi nhé. Hẹn gặp bạn tại buổi lễ!</p>
+                    <button onclick="changeStep('step-4', 'step-map-guide')" class="btn-action btn-map-main" style="display:flex">📍 Xem Sơ Đồ Đường Đi</button>
                 </div>
             </div>
         </div>
@@ -276,11 +249,11 @@
             document.querySelector('.mobile-viewport').scrollTop = 0;
         }
 
-        function handleBackFromMap() { if(!isSubmitted) { changeStep('step-map-guide', 'step-3'); } }
+        function handleBackFromMap() { if(!isSubmitted) changeStep('step-map-guide', 'step-3'); }
 
         function handleExitInvite() {
             if (confirm("Có quên tải gì hong? Nhớ kiểm tra xem đã tải ảnh và xem rõ đường đi chưa nha! Thoát bây giờ luôn hả?")) {
-                window.close(); alert("Thư nhờ bạn hãy đóng tab trình duyệt để thoát nhé! ❤️");
+                window.close(); alert("Kiệt nhờ bạn hãy đóng tab trình duyệt để thoát nhé! ❤️");
             }
         }
 
@@ -291,7 +264,7 @@
 
         function goToStep2() {
             guestNameVal = document.getElementById('inputGuestName').value.trim();
-            if(!guestNameVal) return alert("Thư nhờ bạn nhập tên nhé!");
+            if(!guestNameVal) return alert("Kiệt nhờ bạn nhập tên nhé!");
             document.getElementById('guest-name-overlay').innerText = guestNameVal;
             document.getElementById('finalNameInput').value = guestNameVal;
             changeStep('step-1', 'step-2');
@@ -305,12 +278,21 @@
             else { audio.pause(); document.getElementById('music-btn').innerText = '🔇'; document.getElementById('music-btn').classList.remove('music-spinning'); }
         }
 
-        function toggleWishForm() { const f = document.getElementById('wish-form-container'); f.style.display = (f.style.display === 'none') ? 'block' : 'none'; if(f.style.display === 'block') document.getElementById('step-3').scrollTo({ top: 800, behavior: 'smooth' }); }
-        function setAttendance(val, el) { document.querySelectorAll('.choice-item').forEach(i => i.classList.remove('active')); el.classList.add('active'); selectedAttendance = val; }
+        function toggleWishForm() { 
+            const f = document.getElementById('wish-form-container'); 
+            f.style.display = (f.style.display === 'none') ? 'block' : 'none'; 
+            if(f.style.display === 'block') document.getElementById('step-3').scrollTo({ top: 1000, behavior: 'smooth' }); 
+        }
+        
+        function setAttendance(val, el) { 
+            document.querySelectorAll('.wrapper .choice-item').forEach(i => {i.style.borderColor='#eee'; i.style.background='#fff'; i.style.color='#000'}); 
+            el.style.borderColor='var(--primary)'; el.style.background='#eef5ff'; el.style.color='var(--primary)';
+            selectedAttendance = val; 
+        }
 
         function processSendWish() {
             const wish = document.getElementById('finalWishText').value;
-            if(!selectedAttendance || !wish) return alert("Điền đủ thông tin giúp Thư nha!");
+            if(!selectedAttendance || !wish) return alert("Điền đủ thông tin giúp Kiệt nha!");
             const form = document.createElement('form');
             form.action = `https://docs.google.com/forms/d/e/1FAIpQLScRt2Ln2NH1rbyaETmzkp3VaYzaGAZZUhhR1XgRF0yyf5XGSQ/formResponse`;
             form.method = 'POST'; form.target = 'hidden_iframe';
