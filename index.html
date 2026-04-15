@@ -13,6 +13,9 @@
             --gold-dark: #b8860b;
             --glass: rgba(255, 255, 255, 0.85);
             --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --cute-pink: #fff0f3; 
+            --cute-pink-border: #ffcad4;
+            --cute-pink-mess: #ff8fa3; /* Màu hồng cho nút mess của Thư */
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         
@@ -38,12 +41,10 @@
         .music-spinning { animation: spin 4s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* Step 0: Intro */
         #step-intro { position: absolute; inset: 0; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 3000; cursor: pointer; }
         .intro-img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease-in; }
         .zoom-out-effect { transform: scale(10); opacity: 0; }
 
-        /* Step 1: Nhập tên */
         #step-1 { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 120px; z-index: 2000; }
         .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
         .video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: -1; }
@@ -57,16 +58,14 @@
         .name-field { width: 100%; border: 1px solid #ddd; border-radius: 15px; margin-bottom: 25px; outline: none; text-align: center; background: #fff; font-weight: bold; padding: 15px; font-size: 1rem; }
         .btn-start { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; padding: 16px; border: none; border-radius: 15px; font-weight: 800; width: 100%; text-transform: uppercase; cursor: pointer; }
 
-        /* Wrappers */
         .wrapper { display: none; flex-direction: column; width: 100%; height: 100%; background: #f8f9fa; overflow-y: auto; }
         .step-content-centered { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 20px; }
 
-        /* Step 2: Thiệp chính */
         .invite-img-container { position: relative; width: 95%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 4px solid #fff; }
         .invite-img { width: 100%; display: block; }
-        #guest-name-overlay { position: absolute; top: 11%; left: 50%; transform: translate(calc(-50% - 85px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #1a1a1a; }
+        
+        #guest-name-overlay { position: absolute; top: 8%; left: 50%; transform: translate(calc(-50% - 75px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #1a1a1a; }
 
-        /* Step 3: Nội dung */
         .classic-header h3 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 3.2rem; margin: 10px 0 25px 0; text-align: center; width: 100%; }
         .countdown-card { 
             background: var(--glass); backdrop-filter: blur(15px); padding: 25px 15px; 
@@ -84,20 +83,30 @@
         #wish-form-container { display: none; width: 100%; margin-top: 25px; padding: 25px; background: #fff; border-radius: 25px; border: 1.5px dashed var(--gold); }
         .form-input-classic { width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; margin-bottom: 15px; outline: none; }
 
-        /* Step Map - Fix lỗi CSS trang cuối */
         #step-map-guide { background: #f4f7f9; }
         .map-container { padding: 25px; display: flex; flex-direction: column; align-items: center; }
         .map-guide-img { width: 100%; border-radius: 20px; margin-bottom: 20px; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
         .contact-grid { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
-        .contact-card { background: #fff; border-radius: 20px; padding: 20px; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .contact-card.host { border-left: 6px solid var(--gold); }
+        .contact-card { background: #fff; border-radius: 20px; padding: 20px; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.03); text-align: left; }
+        
+        /* BOX HỒNG CUTE CHO ANH THƯ */
+        .contact-card.host { 
+            background: var(--cute-pink); 
+            border: 1px solid var(--cute-pink-border); 
+            border-left: 6px solid var(--cute-pink-border); 
+        }
+        .contact-card.host .contact-name { color: #d63384; }
         .contact-card.assistant { border-left: 6px solid var(--primary); }
+        
         .contact-title { font-size: 0.75rem; color: #999; text-transform: uppercase; font-weight: 800; margin-bottom: 5px; display: block; }
         .contact-name { font-size: 1.1rem; font-weight: bold; color: #222; margin-bottom: 15px; display: block; }
 
         .btn-contact { display: block; padding: 12px; border-radius: 12px; color: #fff; text-align: center; text-decoration: none; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; transition: 0.3s; }
-        .btn-contact.ms { background: #0084ff; }
+        /* MESS CHO THƯ MÀU HỒNG */
+        .btn-contact.ms-thu { background: var(--cute-pink-mess); }
+        /* MESS CHO KIỆT MÀU XANH */
+        .btn-contact.ms-kiet { background: #0084ff; }
         .btn-contact.ph { background: #2ecc71; }
         .btn-exit { background: #37474f; color: #fff; margin-top: 10px; width: 100%; }
 
@@ -119,7 +128,7 @@
             <div class="video-overlay"></div>
             <div class="input-box">
                 <h2>Chương mới của mình cần có mặt</h2>
-                <input type="text" id="inputGuestName" class="name-field" placeholder="Tên của bạn là...">
+                <input type="text" id="inputGuestName" class="name-field" placeholder="Tên của Bạn là...">
                 <button class="btn-start" onclick="goToStep2()">Mở thiệp mời</button>
             </div>
         </div>
@@ -143,7 +152,7 @@
         <div id="step-3" class="wrapper">
             <div class="step-content-centered">
                 <div class="classic-header">
-                    <p style="text-align:center; letter-spacing:3px; color:#888">Trân trọng kính mời</p>
+                    <p style="text-align:center; letter-spacing:3px; color:#888">Trân trọng kính mời Bạn đến dự lễ tốt nghiệp của</p>
                     <h3>Văn Anh Thư</h3>
                 </div>
                 <div class="countdown-card">
@@ -157,15 +166,15 @@
                 <button id="mainWishBtn" onclick="toggleWishForm()" class="btn-action btn-wish">💌 Gửi Lời Chúc & Xác Nhận</button>
                 <button id="mainMapBtn" onclick="changeStep('step-3', 'step-map-guide')" class="btn-action btn-map-main">📍 Xem Vị Trí & Hướng Dẫn</button>
                 <p id="lockMsg" style="color:#e67e22; font-size:0.85rem; margin-top:15px; font-style:italic; background:rgba(230,126,34,0.1); padding:10px 20px; border-radius:15px; text-align:center;">
-                    Thư nhờ bạn gửi lời chúc để mở sơ đồ nhé! ❤️
+                    Thư nhờ Bạn gửi lời chúc để mở sơ đồ nhé! ❤️
                 </p>
                 <div id="wish-form-container">
                     <input type="text" id="finalNameInput" class="form-input-classic" readonly style="color:#999">
                     <div style="display:flex; gap:12px; margin-bottom:15px;">
-                        <div class="choice-item" style="flex:1;padding:12px;border:1.5px solid #eee;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;background:#fff" id="opt-yes" onclick="setAttendance('yes', this)">Sẽ đến dự 😍</div>
+                        <div class="choice-item" style="flex:1;padding:12px;border:1.5px solid #eee;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;background:#fff" id="opt-yes" onclick="setAttendance('yes', this)">Tất nhiên gòi 😍</div>
                         <div class="choice-item" style="flex:1;padding:12px;border:1.5px solid #eee;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;background:#fff" id="opt-no" onclick="setAttendance('no', this)">Tiếc quá bận mất 🥺</div>
                     </div>
-                    <textarea id="finalWishText" class="form-input-classic" rows="3" placeholder="Lời chúc của bạn..."></textarea>
+                    <textarea id="finalWishText" class="form-input-classic" rows="3" placeholder="Lời chúc của Bạn..."></textarea>
                     <button id="finalSubmitBtn" onclick="processSendWish()" class="btn-start" style="width:100%">Xác nhận gửi</button>
                 </div>
             </div>
@@ -182,7 +191,7 @@
                 <img src="bandohuongdan.jpg" class="map-guide-img">
                 
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:25px; width:100%;">
-                    <a href="https://maps.google.com" target="_blank" class="btn-action btn-wish" style="margin:0">📍 Google Maps</a>
+                    <a href="https://maps.app.goo.gl/92ar5iwRBQHqcoWW6" target="_blank" class="btn-action btn-wish" style="margin:0">📍 Google Maps</a>
                     <a href="bandohuongdan.jpg" download class="btn-action" style="margin:0; background:#2980b9; color:#fff">📥 Tải Ảnh</a>
                 </div>
 
@@ -190,13 +199,13 @@
                     <div class="contact-card host">
                         <span class="contact-title">Chủ buổi lễ</span>
                         <span class="contact-name">Văn Anh Thư</span>
-                        <a href="https://www.facebook.com/van.anhthu.79395" target="_blank" class="btn-contact ms">💬 Nhắn cho Thư</a>
+                        <a href="https://www.facebook.com/van.anhthu.79395" target="_blank" class="btn-contact ms-thu">💬 Mess cho Thư</a>
                         <a href="tel:0934839201" class="btn-contact ph">📞 Gọi cho Thư</a>
                     </div>
                     <div class="contact-card assistant">
                         <span class="contact-title">Trợ lí</span>
-                        <span class="contact-name">Tuấn Kiệt</span>
-                        <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact ms">💬 Nhắn cho Kiệt</a>
+                        <span class="contact-name">Tuấn Kiệt ( Ưu Tiên )</span>
+                        <a href="https://www.facebook.com/KietandPond" target="_blank" class="btn-contact ms-kiet">💬 Mess cho Kiệt</a>
                         <a href="tel:0981537849" class="btn-contact ph">📞 Gọi cho Kiệt</a>
                     </div>
                 </div>
@@ -213,8 +222,8 @@
             <div class="step-content-centered">
                 <div style="background:#fff; padding:40px 30px; border-radius:30px; box-shadow:0 20px 60px rgba(0,0,0,0.1); text-align:center; width:90%">
                     <h1 style="font-size:5rem; margin-bottom:10px">❤️</h1>
-                    <h2 style="color:var(--primary); font-weight:900; margin-bottom:15px">Cảm ơn bạn!</h2>
-                    <p style="color:#666; line-height:1.6; margin-bottom:30px">Lời chúc đã được Thư nhận rồi nhé. Hẹn gặp bạn tại buổi lễ!</p>
+                    <h2 style="color:var(--primary); font-weight:900; margin-bottom:15px">Cảm ơn Bạn!</h2>
+                    <p style="color:#666; line-height:1.6; margin-bottom:30px">Thư đã nhận được lời chúc của Bạn. Hẹn gặp Bạn tại buổi lễ!</p>
                     <button onclick="changeStep('step-4', 'step-map-guide')" class="btn-action btn-map-main" style="display:flex">📍 Xem Sơ Đồ Đường Đi</button>
                 </div>
             </div>
@@ -253,7 +262,7 @@
 
         function handleExitInvite() {
             if (confirm("Có quên tải gì hong? Nhớ kiểm tra xem đã tải ảnh và xem rõ đường đi chưa nha! Thoát bây giờ luôn hả?")) {
-                window.close(); alert("Kiệt nhờ bạn hãy đóng tab trình duyệt để thoát nhé! ❤️");
+                window.close(); alert("Kiệt nhờ Bạn hãy đóng tab trình duyệt để thoát nhé! ❤️");
             }
         }
 
@@ -264,7 +273,7 @@
 
         function goToStep2() {
             guestNameVal = document.getElementById('inputGuestName').value.trim();
-            if(!guestNameVal) return alert("Kiệt nhờ bạn nhập tên nhé!");
+            if(!guestNameVal) return alert("Thư nhờ Bạn nhập tên nhé!");
             document.getElementById('guest-name-overlay').innerText = guestNameVal;
             document.getElementById('finalNameInput').value = guestNameVal;
             changeStep('step-1', 'step-2');
@@ -285,7 +294,7 @@
         }
         
         function setAttendance(val, el) { 
-            document.querySelectorAll('.wrapper .choice-item').forEach(i => {i.style.borderColor='#eee'; i.style.background='#fff'; i.style.color='#000'}); 
+            document.querySelectorAll('.wrapper #wish-form-container .choice-item').forEach(i => {i.style.borderColor='#eee'; i.style.background='#fff'; i.style.color='#000'}); 
             el.style.borderColor='var(--primary)'; el.style.background='#eef5ff'; el.style.color='var(--primary)';
             selectedAttendance = val; 
         }
