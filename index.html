@@ -15,7 +15,7 @@
             --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             --cute-pink: #fff0f3; 
             --cute-pink-border: #ffcad4;
-            --cute-pink-mess: #ff8fa3; /* Màu hồng cho nút mess của Thư */
+            --cute-pink-mess: #ff8fa3;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         
@@ -45,25 +45,28 @@
         .intro-img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease-in; }
         .zoom-out-effect { transform: scale(10); opacity: 0; }
 
-        #step-1 { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 120px; z-index: 2000; }
+        #step-1 { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 150px; z-index: 2000; }
         .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
         .video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: -1; }
+        
+        /* CHỈNH BOX NHẬP TÊN NHỎ GỌN (NGANG & DỌC) */
         .input-box { 
             background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); 
-            border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+            border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
             text-align: center; border: 1px solid rgba(255,255,255,0.4);
-            width: 70%; max-width: 280px; padding: 40px 25px; 
+            width: 50%; /* Giảm từ 60% xuống 50% cho hẹp lại */
+            max-width: 180px; /* Giảm max-width */
+            padding: 20px 15px; /* Giảm từ 30px xuống 20px cho bớt cao */
         }
-        .input-box h2 { font-size: 1.2rem; color: #111; margin-bottom: 25px; font-weight: 800; }
-        .name-field { width: 100%; border: 1px solid #ddd; border-radius: 15px; margin-bottom: 25px; outline: none; text-align: center; background: #fff; font-weight: bold; padding: 15px; font-size: 1rem; }
-        .btn-start { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; padding: 16px; border: none; border-radius: 15px; font-weight: 800; width: 100%; text-transform: uppercase; cursor: pointer; }
+        .input-box h2 { font-size: 0.95rem; color: #111; margin-bottom: 15px; font-weight: 800; }
+        .name-field { width: 100%; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; outline: none; text-align: center; background: #fff; font-weight: bold; padding: 10px; font-size: 0.85rem; }
+        .btn-start { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; padding: 12px; border: none; border-radius: 10px; font-weight: 800; width: 100%; text-transform: uppercase; cursor: pointer; font-size: 0.75rem; }
 
         .wrapper { display: none; flex-direction: column; width: 100%; height: 100%; background: #f8f9fa; overflow-y: auto; }
         .step-content-centered { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 20px; }
 
         .invite-img-container { position: relative; width: 95%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 4px solid #fff; }
         .invite-img { width: 100%; display: block; }
-        
         #guest-name-overlay { position: absolute; top: 8%; left: 50%; transform: translate(calc(-50% - 75px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #1a1a1a; }
 
         .classic-header h3 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 3.2rem; margin: 10px 0 25px 0; text-align: center; width: 100%; }
@@ -90,25 +93,17 @@
         .contact-grid { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
         .contact-card { background: #fff; border-radius: 20px; padding: 20px; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.03); text-align: left; }
         
-        /* BOX HỒNG CUTE CHO ANH THƯ */
-        .contact-card.host { 
-            background: var(--cute-pink); 
-            border: 1px solid var(--cute-pink-border); 
-            border-left: 6px solid var(--cute-pink-border); 
-        }
+        .contact-card.host { background: var(--cute-pink); border: 1px solid var(--cute-pink-border); border-left: 6px solid var(--cute-pink-border); }
         .contact-card.host .contact-name { color: #d63384; }
         .contact-card.assistant { border-left: 6px solid var(--primary); }
-        
         .contact-title { font-size: 0.75rem; color: #999; text-transform: uppercase; font-weight: 800; margin-bottom: 5px; display: block; }
         .contact-name { font-size: 1.1rem; font-weight: bold; color: #222; margin-bottom: 15px; display: block; }
 
         .btn-contact { display: block; padding: 12px; border-radius: 12px; color: #fff; text-align: center; text-decoration: none; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; transition: 0.3s; }
-        /* MESS CHO THƯ MÀU HỒNG */
         .btn-contact.ms-thu { background: var(--cute-pink-mess); }
-        /* MESS CHO KIỆT MÀU XANH */
         .btn-contact.ms-kiet { background: #0084ff; }
         .btn-contact.ph { background: #2ecc71; }
-        .btn-exit { background: #37474f; color: #fff; margin-top: 10px; width: 100%; }
+        .btn-exit { background: #37474f; color: #fff; margin-top: 20px; width: 100%; }
 
         .nav-footer { padding: 15px 20px; background: var(--glass); backdrop-filter: blur(10px); border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; bottom: 0; width: 100%; }
         .btn-nav { padding: 12px 22px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; font-size: 0.85rem; }
@@ -152,7 +147,7 @@
         <div id="step-3" class="wrapper">
             <div class="step-content-centered">
                 <div class="classic-header">
-                    <p style="text-align:center; letter-spacing:3px; color:#888">Trân trọng kính mời Bạn đến dự lễ tốt nghiệp của</p>
+                    <p style="text-align:center; letter-spacing:3px; color:#888">Trân trọng kính mời Bạn<br>Đến dự lễ tốt nghiệp của</p>
                     <h3>Văn Anh Thư</h3>
                 </div>
                 <div class="countdown-card">
