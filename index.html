@@ -257,7 +257,7 @@
 
         function handleExitInvite() {
             if (confirm("Có quên tải gì hong? Nhớ kiểm tra xem đã tải ảnh và xem rõ đường đi chưa nha! Thoát bây giờ luôn hả?")) {
-                window.close(); alert("Kiệt nhờ Bạn hãy đóng tab trình duyệt để thoát nhé! ❤️");
+                window.close(); alert("Thư nhờ Bạn hãy đóng tab trình duyệt để thoát nhé! ❤️");
             }
         }
 
@@ -296,7 +296,7 @@
 
         function processSendWish() {
             const wish = document.getElementById('finalWishText').value;
-            if(!selectedAttendance || !wish) return alert("Điền đủ thông tin giúp Kiệt nha!");
+            if(!selectedAttendance || !wish) return alert("Điền đủ thông tin giúp Thư nha!");
             const form = document.createElement('form');
             form.action = `https://docs.google.com/forms/d/e/1FAIpQLScRt2Ln2NH1rbyaETmzkp3VaYzaGAZZUhhR1XgRF0yyf5XGSQ/formResponse`;
             form.method = 'POST'; form.target = 'hidden_iframe';
