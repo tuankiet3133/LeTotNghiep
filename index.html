@@ -23,7 +23,8 @@
 
         .mobile-viewport {
             width: 100%; height: 100vh; max-width: 450px; 
-            background: #f4f7f9; position: relative; display: flex; flex-direction: column;
+            background: #f4f7f9;
+            position: relative; display: flex; flex-direction: column;
             overflow: hidden; box-shadow: 0 0 60px rgba(0,0,0,0.6);
         }
 
@@ -44,7 +45,8 @@
         .intro-img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease-in; }
         .zoom-out-effect { transform: scale(10); opacity: 0; }
 
-        #step-1 { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 150px; z-index: 2000; }
+        /* Step 1 & Step Role sharing styles */
+        .step-overlay-wrapper { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 150px; z-index: 2000; }
         .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
         .video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: -1; }
         
@@ -52,7 +54,7 @@
             background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); 
             border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
             text-align: center; border: 1px solid rgba(255,255,255,0.4);
-            width: 50%; max-width: 180px; padding: 20px 15px; 
+            width: 60%; max-width: 220px; padding: 25px 20px; 
         }
         .input-box h2 { font-size: 0.95rem; color: #111; margin-bottom: 15px; font-weight: 800; }
         .name-field { width: 100%; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; outline: none; text-align: center; background: #fff; font-weight: bold; padding: 10px; font-size: 0.85rem; }
@@ -66,7 +68,7 @@
         #guest-name-overlay { position: absolute; top: 8%; left: 50%; transform: translate(calc(-50% - 75px), 0); width: 90%; text-align: center; font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #1a1a1a; }
 
         .classic-header h3 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 3.2rem; margin: 10px 0 25px 0; text-align: center; width: 100%; }
-        .countdown-card { background: var(--glass); backdrop-filter: blur(15px); padding: 25px 15px; border-radius: 25px; margin-bottom: 30px; width: 100%; border: 1px solid rgba(255,255,255,0.6); }
+        .countdown-card { background: var(--glass); backdrop-filter: blur(15px); padding: 25px 15px; border-radius: 25px; margin-bottom: 30px; width: 100%; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
         #countdown { display: flex; justify-content: space-around; }
         .cd-item b { font-size: 1.8rem; display: block; color: var(--primary); line-height: 1; margin-bottom: 5px; }
         .cd-item span { font-size: 0.7rem; color: #888; text-transform: uppercase; }
@@ -78,6 +80,7 @@
         #wish-form-container { display: none; width: 100%; margin-top: 25px; padding: 25px; background: #fff; border-radius: 25px; border: 1.5px dashed var(--gold); }
         .form-input-classic { width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; margin-bottom: 15px; outline: none; }
 
+        #step-map-guide { background: #f4f7f9; }
         .map-container { padding: 25px; display: flex; flex-direction: column; align-items: center; }
         .map-guide-img { width: 100%; border-radius: 20px; margin-bottom: 20px; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
@@ -90,7 +93,7 @@
         .contact-title { font-size: 0.75rem; color: #999; text-transform: uppercase; font-weight: 800; margin-bottom: 5px; display: block; }
         .contact-name { font-size: 1.1rem; font-weight: bold; color: #222; margin-bottom: 15px; display: block; }
 
-        .btn-contact { display: block; padding: 12px; border-radius: 12px; color: #fff; text-align: center; text-decoration: none; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; }
+        .btn-contact { display: block; padding: 12px; border-radius: 12px; color: #fff; text-align: center; text-decoration: none; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; transition: 0.3s; }
         .btn-contact.ms-thu { background: var(--cute-pink-mess); }
         .btn-contact.ms-kiet { background: #0084ff; }
         .btn-contact.ph { background: #2ecc71; }
@@ -109,13 +112,25 @@
             <img src="introthiep.jpg" id="introImg" class="intro-img">
         </div>
 
-        <div id="step-1">
+        <div id="step-1" class="step-overlay-wrapper">
             <video autoplay muted loop playsinline class="video-bg"><source src="background-video.mp4" type="video/mp4"></video>
             <div class="video-overlay"></div>
             <div class="input-box">
                 <h2>Chương mới của mình cần có mặt</h2>
                 <input type="text" id="inputGuestName" class="name-field" placeholder="Tên của Bạn là...">
-                <button class="btn-start" onclick="goToStep2()">Mở thiệp mời</button>
+                <button class="btn-start" onclick="goToStepRole()">Tiếp theo →</button>
+            </div>
+        </div>
+
+        <div id="step-role" class="step-overlay-wrapper">
+            <video autoplay muted loop playsinline class="video-bg"><source src="background-video.mp4" type="video/mp4"></video>
+            <div class="video-overlay"></div>
+            <div class="input-box" style="padding: 25px 20px;">
+                <h2 style="margin-bottom: 20px; font-size: 1rem;">Thư muốn biết xíu nè,<br>Bạn là:</h2>
+                <button class="btn-start" style="margin-bottom: 12px; background: linear-gradient(135deg, var(--primary), #0d47a1);" onclick="selectRole('friend')">Bạn Bè 👯</button>
+                <button class="btn-start" style="background: linear-gradient(135deg, #9c27b0, #6a1b9a);" onclick="selectRole('colleague')">Đồng Nghiệp 💼</button>
+                
+                <button style="background: transparent; border: none; color: #555; font-size: 0.8rem; margin-top: 15px; font-weight: bold; cursor: pointer; text-decoration: underline;" onclick="changeStep('step-role', 'step-1')">← Sửa lại tên</button>
             </div>
         </div>
 
@@ -124,12 +139,12 @@
         <div id="step-2" class="wrapper">
             <div class="step-content-centered">
                 <div class="invite-img-container">
-                    <img src="background-card.jpg" class="invite-img">
+                    <img src="background-card.jpg" id="main-invite-img" class="invite-img">
                     <div id="guest-name-overlay"></div>
                 </div>
             </div>
             <div class="nav-footer">
-                <button class="btn-nav" style="background:#eee;color:#666" onclick="changeStep('step-2', 'step-1')">← Xem lại</button>
+                <button class="btn-nav" style="background:#eee;color:#666" onclick="changeStep('step-2', 'step-role')">← Xem lại</button>
                 <div id="music-pos-2"></div>
                 <button class="btn-nav" style="background:var(--primary);color:#fff" onclick="changeStep('step-2', 'step-3')">Đến buổi lễ →</button>
             </div>
@@ -161,7 +176,7 @@
                         <div class="choice-item" style="flex:1;padding:12px;border:1.5px solid #eee;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;background:#fff" id="opt-no" onclick="setAttendance('Tiếc quá bận mất', this)">Tiếc quá bận mất 🥺</div>
                     </div>
                     <textarea id="finalWishText" class="form-input-classic" rows="3" placeholder="Lời chúc của Bạn..."></textarea>
-                    <button id="finalSubmitBtn" onclick="processSendWish()" class="btn-start" style="width:100%">Xác nhận gửi</button>
+                    <button id="finalSubmitBtn" onclick="processSendWish()" class="btn-start" style="width:100%; padding: 16px;">Xác nhận gửi</button>
                 </div>
             </div>
             <div class="nav-footer" id="mainFooter">
@@ -173,12 +188,14 @@
 
         <div id="step-map-guide" class="wrapper">
             <div class="map-container">
-                <h3 style="text-align:center; color:var(--primary); font-weight:900; margin-bottom:20px;">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</h3>
+                <h3 style="text-align:center; color:var(--primary); font-weight:900; margin-bottom:20px; letter-spacing:1px;">🗺️ HƯỚNG DẪN ĐƯỜNG ĐI</h3>
                 <img src="bandohuongdan.jpg" class="map-guide-img">
+                
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:25px; width:100%;">
-                    <a href="https://maps.google.com" target="_blank" class="btn-action btn-wish" style="margin:0">📍 Google Maps</a>
+                    <a href="https://maps.app.goo.gl/92ar5iwRBQHqcoWW6" target="_blank" class="btn-action btn-wish" style="margin:0">📍 Google Maps</a>
                     <a href="bandohuongdan.jpg" download class="btn-action" style="margin:0; background:#2980b9; color:#fff">📥 Tải Ảnh</a>
                 </div>
+
                 <div class="contact-grid">
                     <div class="contact-card host">
                         <span class="contact-title">Chủ buổi lễ</span>
@@ -217,20 +234,32 @@
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <script>
-        let guestNameVal = ""; let selectedAttendance = ""; let isSubmitted = false; const audio = document.getElementById('bgMusic');
+        let guestNameVal = ""; 
+        let selectedAttendance = ""; 
+        let isSubmitted = false; 
+        const audio = document.getElementById('bgMusic');
+        
+        // Mặc định thời gian đếm ngược là dành cho BẠN BÈ (15:00)
+        let graduationDateObj = new Date("April 24, 2026 15:00:00").getTime();
 
         function syncMusicBtn(next) {
             const btn = document.getElementById('music-btn');
             if (next === 'step-intro') return btn.style.display = 'none';
             btn.style.display = 'flex';
-            const targetPos = document.getElementById(`music-pos-${next.replace('step-','')}`) || document.getElementById('music-pos-3') || document.getElementById('music-pos-map');
-            if (targetPos) targetPos.appendChild(btn);
+            if (next === 'step-1' || next === 'step-role') {
+                btn.style.position = 'fixed'; btn.style.top = '20px'; btn.style.left = '20px';
+                document.querySelector('.mobile-viewport').appendChild(btn);
+            } else {
+                btn.style.position = 'static';
+                const targetPos = document.getElementById(`music-pos-${next.replace('step-','')}`) || document.getElementById('music-pos-3') || document.getElementById('music-pos-map');
+                if (targetPos) targetPos.appendChild(btn);
+            }
         }
 
         function changeStep(curr, next) {
-            document.querySelectorAll('.wrapper, #step-1, #step-intro, #step-4, #step-map-guide').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.wrapper, .step-overlay-wrapper, #step-intro').forEach(el => el.style.display = 'none');
             const nextEl = document.getElementById(next);
-            nextEl.style.display = (next === 'step-1' ? 'flex' : 'flex');
+            nextEl.style.display = (next === 'step-1' || next === 'step-role') ? 'flex' : 'flex';
             syncMusicBtn(next);
             nextEl.classList.remove('page-transition'); void nextEl.offsetWidth; nextEl.classList.add('page-transition');
             document.querySelector('.mobile-viewport').scrollTop = 0;
@@ -249,12 +278,28 @@
             setTimeout(() => changeStep('step-intro', 'step-1'), 1200);
         }
 
-        function goToStep2() {
+        // TÁCH LOGIC: Nhập tên xong chuyển sang Chọn Role
+        function goToStepRole() {
             guestNameVal = document.getElementById('inputGuestName').value.trim();
             if(!guestNameVal) return alert("Thư nhờ Bạn nhập tên nhé!");
             document.getElementById('guest-name-overlay').innerText = guestNameVal;
             document.getElementById('finalNameInput').value = guestNameVal;
-            changeStep('step-1', 'step-2');
+            changeStep('step-1', 'step-role');
+        }
+
+        // TÁCH LOGIC: Chọn Role xong mới set thông số và Mở Thiệp
+        function selectRole(role) {
+            if(role === 'colleague') {
+                // Luồng Đồng Nghiệp: Đổi ảnh và đổi giờ thành 15h30
+                document.getElementById('main-invite-img').src = 'background-card2.jpg';
+                graduationDateObj = new Date("April 24, 2026 15:30:00").getTime();
+            } else {
+                // Luồng Bạn Bè: Giữ nguyên ảnh gốc và giờ 15h00
+                document.getElementById('main-invite-img').src = 'background-card.jpg';
+                graduationDateObj = new Date("April 24, 2026 15:00:00").getTime();
+            }
+
+            changeStep('step-role', 'step-2');
             audio.play().catch(e => {});
             document.getElementById('music-btn').classList.add('music-spinning');
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 } });
@@ -291,7 +336,7 @@
 
             const data = {
                 "entry.1447010642": guestNameVal,
-                "entry.1364691255": selectedAttendance, // Giá trị này bây giờ là "Tất nhiên gòi"
+                "entry.1364691255": selectedAttendance, 
                 "entry.1020605170": wish
             };
 
@@ -321,9 +366,9 @@
             confetti({ particleCount: 150 });
         }
 
-        const graduationDate = new Date("April 24, 2026 15:00:00").getTime();
+        // Logic đếm ngược chạy ngầm liên tục dựa trên biến graduationDateObj
         setInterval(() => {
-            const now = new Date().getTime(); const dist = graduationDate - now;
+            const now = new Date().getTime(); const dist = graduationDateObj - now;
             if (dist < 0) return document.getElementById('countdown').innerHTML = "🎉 LỄ TỐT NGHIỆP ĐANG DIỄN RA! 🎉";
             ['days','hours','minutes','seconds'].forEach((id, i) => {
                 const vals = [Math.floor(dist/(1000*60*60*24)), Math.floor((dist%(1000*60*60*24))/(1000*60*60)), Math.floor((dist%(1000*60*60))/(1000*60)), Math.floor((dist%(1000*60))/1000)];
